@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ingredient{% endblock %}
+
+{% block body %}
+    <h1>Ingredient</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ingredient.id }}</td>
+            </tr>
+            <tr>
+                <th>Aliment</th>
+                <td>{{ ingredient.aliment }}</td>
+            </tr>
+            <tr>
+                <th>Calories</th>
+                <td>{{ ingredient.calories }}</td>
+            </tr>
+            <tr>
+                <th>Proteins</th>
+                <td>{{ ingredient.proteins }}</td>
+            </tr>
+            <tr>
+                <th>Carbs</th>
+                <td>{{ ingredient.carbs }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ingredient_index') }}">back to list</a>
+
+    <a href="{{ path('app_ingredient_edit', {'id': ingredient.id}) }}">edit</a>
+
+    {{ include('ingredient/_delete_form.html.twig') }}
+{% endblock %}
