@@ -28,15 +28,19 @@ class Ingredient
     private ?float $carbs = null;
 
     /**
-     * @var Collection<int, Plats>
+     * @var Collection<int, Recette>
      */
-    #[ORM\ManyToMany(targetEntity: Plats::class, mappedBy: 'Ingredient')]
-    private Collection $plats;
+    #[ORM\ManyToMany(targetEntity: Recette::class, mappedBy: 'Ingredient')]
+    private Collection $recettes;
 
     public function __construct()
     {
-        $this->plats = new ArrayCollection();
+        $this->recettes = new ArrayCollection();
     }
+
+    /**
+     * @var Collection<int, Plats>
+     */
 
     public function getId(): ?int
     {
@@ -94,27 +98,33 @@ class Ingredient
     /**
      * @return Collection<int, Plats>
      */
-    public function getPlats(): Collection
+
+    /**
+     * @return Collection<int, Recette>
+     */
+    public function getRecettes(): Collection
     {
-        return $this->plats;
+        return $this->recettes;
     }
 
-    public function addPlat(Plats $plat): static
+    public function addRecette(Recette $recette): static
     {
-        if (!$this->plats->contains($plat)) {
-            $this->plats->add($plat);
-            $plat->addIngredient($this);
+        if (!$this->recettes->contains($recette)) {
+            $this->recettes->add($recette);
+            $recette->addIngredient($this);
         }
 
         return $this;
     }
 
-    public function removePlat(Plats $plat): static
+    public function removeRecette(Recette $recette): static
     {
-        if ($this->plats->removeElement($plat)) {
-            $plat->removeIngredient($this);
+        if ($this->recettes->removeElement($recette)) {
+            $recette->removeIngredient($this);
         }
 
         return $this;
     }
+   
 }
+

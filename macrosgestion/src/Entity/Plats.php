@@ -26,16 +26,20 @@ class Plats
     private ?Utilisateur $utilisateur = null;
 
     /**
-     * @var Collection<int, Ingredient>
+     * @var Collection<int, Recette>
      */
-    #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'plats')]
-    private Collection $Ingredient;
+    #[ORM\OneToMany(targetEntity: Recette::class, mappedBy: 'Plats')]
+    private Collection $recettes;
 
     public function __construct()
     {
-        $this->Ingredient = new ArrayCollection();
+        $this->recettes = new ArrayCollection();
     }
 
+    /**
+     * @var Collection<int, Ingredient>
+     */
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -80,24 +84,35 @@ class Plats
     /**
      * @return Collection<int, Ingredient>
      */
-    public function getIngredient(): Collection
+
+    /**
+     * @return Collection<int, Recette>
+     */
+    public function getRecettes(): Collection
     {
-        return $this->Ingredient;
+        return $this->recettes;
     }
 
-    public function addIngredient(Ingredient $ingredient): static
+    public function addRecette(Recette $recette): static
     {
-        if (!$this->Ingredient->contains($ingredient)) {
-            $this->Ingredient->add($ingredient);
+        if (!$this->recettes->contains($recette)) {
+            $this->recettes->add($recette);
+            $recette->setPlats($this);
         }
 
         return $this;
     }
 
-    public function removeIngredient(Ingredient $ingredient): static
+    public function removeRecette(Recette $recette): static
     {
-        $this->Ingredient->removeElement($ingredient);
+        if ($this->recettes->removeElement($recette)) {
+            // set the owning side to null (unless already changed)
+            if ($recette->getPlats() === $this) {
+                $recette->setPlats(null);
+            }
+        }
 
         return $this;
     }
+    
 }
