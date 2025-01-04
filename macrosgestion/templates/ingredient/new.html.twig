@@ -1,11 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Ingredient{% endblock %}
+{% block title %}Create New Ingredient{% endblock %}
 
 {% block body %}
-    <h1>Create new Ingredient</h1>
+    <div class="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-6">
+            <h1 class="text-2xl font-semibold text-black mb-6">Create New Ingredient</h1>
 
-    {{ include('ingredient/_form.html.twig') }}
+            <div class="space-y-6">
+                {{ include('ingredient/_form.html.twig') }}
+            </div>
 
-    <a href="{{ path('app_ingredient_index') }}">back to list</a>
+            <div class="mt-4 flex justify-between">
+                <a href="{{ path('app_ingredient_index') }}" class="text-black hover:text-gray-700 font-medium">Back to List</a>
+                <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Save Ingredient
+                </button>
+            </div>
+        </div>
+    </div>
 {% endblock %}

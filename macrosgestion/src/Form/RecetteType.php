@@ -15,16 +15,15 @@ class RecetteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('quantite')
+            ->add('titre')
             ->add('instructions')
-            ->add('Ingredient', EntityType::class, [
+          
+            ->add('ingredient', EntityType::class, [
                 'class' => Ingredient::class,
-                'choice_label' => 'id',
+                'choice_label' => 'aliment',
                 'multiple' => true,
-            ])
-            ->add('Plats', EntityType::class, [
-                'class' => Plats::class,
-                'choice_label' => 'id',
+                'expanded' => true, // Affiche les checkboxes
+                'label' => 'aliment',
             ])
         ;
     }

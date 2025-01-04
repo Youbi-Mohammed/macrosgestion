@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une recette{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une nouvelle recette</h1>
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <form method="POST" action="{{ path('ajouter_recette') }}">
+        <div>
+            <label for="titre">Titre de la recette :</label>
+            <input type="text" id="titre" name="titre" placeholder="Exemple : Tarte aux pommes" required>
+        </div>
+
+        <div>
+            <label for="instructions">Instructions :</label>
+            <textarea id="instructions" name="instructions" rows="5" placeholder="Décrivez les étapes de la recette" required></textarea>
+        </div>
+
+        <div>
+            <h3>Ingrédients disponibles :</h3>
+            {% for ingredient in ingredients %}
+                <div>
+                    <input type="checkbox" id="ingredient_{{ ingredient.id }}" name="ingredients[]" value="{{ ingredient.id }}">
+                    <label for="ingredient_{{ ingredient.id }}">{{ ingredient.name }}</label>
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Ajouter la recette</button>
+    </form>
+{% endblock %}

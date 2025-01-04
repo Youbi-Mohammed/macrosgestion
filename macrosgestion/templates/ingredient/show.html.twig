@@ -3,36 +3,45 @@
 {% block title %}Ingredient{% endblock %}
 
 {% block body %}
-    <h1>Ingredient</h1>
+    <div class="min-h-screen bg-gray-100 flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-4xl p-6">
+            <h1 class="text-2xl font-semibold text-black mb-6">Ingredient Details</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ ingredient.id }}</td>
-            </tr>
-            <tr>
-                <th>Aliment</th>
-                <td>{{ ingredient.aliment }}</td>
-            </tr>
-            <tr>
-                <th>Calories</th>
-                <td>{{ ingredient.calories }}</td>
-            </tr>
-            <tr>
-                <th>Proteins</th>
-                <td>{{ ingredient.proteins }}</td>
-            </tr>
-            <tr>
-                <th>Carbs</th>
-                <td>{{ ingredient.carbs }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <div class="overflow-x-auto mb-6">
+                <table class="min-w-full table-auto border-collapse">
+                    <tbody class="text-sm text-gray-700">
+                        <tr class="border-b">
+                            <th class="px-4 py-2 text-left font-medium">Id</th>
+                            <td class="px-4 py-2">{{ ingredient.id }}</td>
+                        </tr>
+                        <tr class="border-b">
+                            <th class="px-4 py-2 text-left font-medium">Aliment</th>
+                            <td class="px-4 py-2">{{ ingredient.aliment }}</td>
+                        </tr>
+                        <tr class="border-b">
+                            <th class="px-4 py-2 text-left font-medium">Calories</th>
+                            <td class="px-4 py-2">{{ ingredient.calories }}</td>
+                        </tr>
+                        <tr class="border-b">
+                            <th class="px-4 py-2 text-left font-medium">Proteins</th>
+                            <td class="px-4 py-2">{{ ingredient.proteins }}</td>
+                        </tr>
+                        <tr class="border-b">
+                            <th class="px-4 py-2 text-left font-medium">Carbs</th>
+                            <td class="px-4 py-2">{{ ingredient.carbs }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-    <a href="{{ path('app_ingredient_index') }}">back to list</a>
-
-    <a href="{{ path('app_ingredient_edit', {'id': ingredient.id}) }}">edit</a>
-
-    {{ include('ingredient/_delete_form.html.twig') }}
+            <div class="mt-4 space-x-4">
+                <a href="{{ path('app_ingredient_index') }}" class="inline-block px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                    Back to List
+                </a>
+                <a href="{{ path('app_ingredient_edit', {'id': ingredient.id}) }}" class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Edit
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

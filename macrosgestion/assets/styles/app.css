@@ -1,3 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Components Layer */
+@layer components {
+    /* Responsive container */
+    .container {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+
+    /* Gradient button with hover animation */
+    .btn {
+        @apply inline-flex items-center px-5 py-2.5 text-sm font-medium rounded-lg 
+        bg-gradient-to-r from-indigo-500 to-purple-600 
+        hover:from-indigo-600 hover:to-purple-700 
+        text-white shadow-lg hover:shadow-xl 
+        transform hover:-translate-y-0.5 
+        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 
+        transition-all duration-300 ease-in-out;
+    }
+
+    /* Secondary button variant */
+    .btn-secondary {
+        @apply bg-gradient-to-r from-gray-500 to-gray-600 
+        hover:from-gray-600 hover:to-gray-700 
+        focus:ring-gray-500;
+    }
+
+    /* Elegant card with subtle hover animation */
+    .card {
+        @apply bg-gray-900 border border-gray-800 rounded-xl 
+        shadow-lg hover:shadow-2xl 
+        transform hover:-translate-y-1 
+        backdrop-filter backdrop-blur-lg 
+        transition-all duration-300 ease-in-out;
+    }
+
+    /* Input field styling */
+    .input {
+        @apply mt-1 block w-full px-4 py-3 
+        bg-gray-800 border border-gray-700 
+        rounded-lg shadow-sm 
+        text-gray-100 placeholder-gray-500 
+        focus:border-indigo-500 focus:ring focus:ring-indigo-500/20 
+        transition-colors duration-200 ease-in-out;
+    }
+
+    /* Input labels */
+    .label {
+        @apply block text-sm font-medium text-red-300 mb-2;
+    }
+
+    /* Typography styles for headings */
+    .heading-1 {
+        @apply text-4xl font-bold 
+        bg-gradient-to-r from-white to-gray-300 
+        bg-clip-text text-transparent 
+        mb-6;
+    }
+
+    .heading-2 {
+        @apply text-2xl font-semibold text-gray-100 
+        border-l-4 border-indigo-500 
+        pl-3 mb-4;
+    }
+
+    /* Content text styling */
+    .text-content {
+        @apply text-gray-300 leading-relaxed tracking-wide;
+    }
+}
+
+/* Enhanced dark theme */
 body {
-    background-color: skyblue;
+    @apply bg-gray-950 text-gray-100 min-h-screen antialiased;
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.05) 0%, transparent 100%),
+        radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.05) 0%, transparent 100%);
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+    @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-gray-900;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded-full 
+    hover:bg-gray-600 
+    transition-colors duration-200 ease-in-out;
+}
+
+/* Accessible focus states */
+:focus {
+    @apply outline-none ring-2 ring-indigo-500 ring-offset-2 ring-offset-gray-900;
+}
+
+/* Disabled state for buttons and inputs */
+.btn:disabled, .input:disabled {
+    @apply opacity-50 cursor-not-allowed;
+}
+
+/* Smooth theme transitions */
+* {
+    @apply transition-colors duration-200 ease-in-out;
 }

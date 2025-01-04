@@ -1,11 +1,57 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}New Recette{% endblock %}
-
+{% block title %}New Recipe{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+{% endblock %}
 {% block body %}
-    <h1>Create new Recette</h1>
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12">
+    <div class="container mx-auto px-4 max-w-3xl">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <div class="flex items-center gap-4 mb-2">
+                <a href="{{ path('app_recette_index') }}" 
+                   class="text-gray-600 hover:text-blue-600 transition-all duration-300 group">
+                    <i class="fas fa-arrow-left mr-2 transform group-hover:-translate-x-1 transition-transform"></i>
+                    Back to Recipes
+                </a>
+            </div>
+            <h1 class="text-4xl font-bold text-gray-800 relative inline-block">
+                Create New Recipe
+                <span class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500"></span>
+            </h1>
+        </div>
 
-    {{ include('recette/_form.html.twig') }}
+        <!-- Form Card -->
+        <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+            {{ include('recette/_form.html.twig', {
+                'button_label': 'Create Recipe',
+                'button_class': 'bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:from-blue-600 hover:to-purple-600 transform hover:-translate-y-0.5 transition-all duration-300 shadow-md hover:shadow-lg inline-flex items-center gap-2'
+            }) }}
+        </div>
 
-    <a href="{{ path('app_recette_index') }}">back to list</a>
+        <!-- Quick Tips -->
+        <div class="mt-8 bg-blue-50 rounded-xl p-6 border border-blue-100">
+            <h4 class="text-lg font-semibold text-blue-800 mb-3 flex items-center gap-2">
+                <i class="fas fa-lightbulb text-blue-500"></i>
+                Quick Tips for Recipe Creation
+            </h4>
+            <ul class="text-blue-700 space-y-2">
+                <li class="flex items-center gap-2">
+                    <i class="fas fa-check-circle text-blue-500"></i>
+                    Start with a clear, descriptive title
+                </li>
+                <li class="flex items-center gap-2">
+                    <i class="fas fa-check-circle text-blue-500"></i>
+                    List ingredients in order of use
+                </li>
+                <li class="flex items-center gap-2">
+                    <i class="fas fa-check-circle text-blue-500"></i>
+                    Include preparation and cooking times
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}

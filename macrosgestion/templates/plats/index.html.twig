@@ -3,35 +3,43 @@
 {% block title %}Plats index{% endblock %}
 
 {% block body %}
-    <h1>Plats index</h1>
+<div class="container mx-auto my-12 p-6 max-w-4xl bg-white shadow-xl rounded-lg">
+    <h1 class="text-3xl font-extrabold text-black mb-6">Plats Index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom_du_plat</th>
-                <th>Date_repas</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for plat in plats %}
-            <tr>
-                <td>{{ plat.id }}</td>
-                <td>{{ plat.nomDuPlat }}</td>
-                <td>{{ plat.dateRepas ? plat.dateRepas|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_plats_show', {'id': plat.id}) }}">show</a>
-                    <a href="{{ path('app_plats_edit', {'id': plat.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="overflow-x-auto mb-6">
+        <table class="min-w-full table-auto border-collapse text-sm">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="px-4 py-2 text-left font-medium text-gray-700">Id</th>
+                    <th class="px-4 py-2 text-left font-medium text-gray-700">Nom du plat</th>
+                    <th class="px-4 py-2 text-left font-medium text-gray-700">Date repas</th>
+                    <th class="px-4 py-2 text-left font-medium text-gray-700">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for plat in plats %}
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-4 py-2 text-sm text-gray-900">{{ plat.id }}</td>
+                        <td class="px-4 py-2 text-sm text-gray-900">{{ plat.nomDuPlat }}</td>
+                        <td class="px-4 py-2 text-sm text-gray-900">{{ plat.dateRepas ? plat.dateRepas|date('Y-m-d') : '' }}</td>
+                        <td class="px-4 py-2 text-sm text-gray-900">
+                            <a href="{{ path('app_plats_show', {'id': plat.id}) }}" class="text-blue-600 hover:text-blue-800">show</a>
+                            <a href="{{ path('app_plats_edit', {'id': plat.id}) }}" class="ml-4 text-blue-600 hover:text-blue-800">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="px-4 py-2 text-center text-sm text-gray-500">No records found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-    <a href="{{ path('app_plats_new') }}">Create new</a>
+    <div class="mt-6 text-right">
+        <a href="{{ path('app_plats_new') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            Create New Plat
+        </a>
+    </div>
+</div>
 {% endblock %}

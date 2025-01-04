@@ -15,8 +15,8 @@ class Recette
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?float $quantite = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $titre = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $instructions = null;
@@ -40,14 +40,14 @@ class Recette
         return $this->id;
     }
 
-    public function getQuantite(): ?float
+    public function getTitre(): ?string
     {
-        return $this->quantite;
+        return $this->titre;
     }
 
-    public function setQuantite(float $quantite): static
+    public function setTitre(string $titre): static
     {
-        $this->quantite = $quantite;
+        $this->titre = $titre;
 
         return $this;
     }
@@ -99,4 +99,10 @@ class Recette
 
         return $this;
     }
+    public function sumCalories(array $ingredients): int
+{
+    return array_reduce($ingredients, function ($carry, $ingredient) {
+        return $carry + $ingredient->getCalories();
+    }, 0);
+}
 }

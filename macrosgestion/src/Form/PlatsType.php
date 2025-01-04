@@ -21,12 +21,7 @@ class PlatsType extends AbstractType
             ])
             ->add('utilisateur', EntityType::class, [
                 'class' => Utilisateur::class,
-                'choice_label' => 'id',
-            ])
-            ->add('Ingredient', EntityType::class, [
-                'class' => Ingredient::class,
-                'choice_label' => 'id',
-                'multiple' => true,
+                'choice_label' => 'nom',
             ])
         ;
     }

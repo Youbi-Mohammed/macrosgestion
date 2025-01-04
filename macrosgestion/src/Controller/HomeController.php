@@ -32,4 +32,6 @@ final class HomeController extends AbstractController
     {
         return $this->redirectToRoute('app_utilisateur_index');
     }
+    
+    
 }

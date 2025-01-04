@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/recette')]
+#[Route('/Recette')]
 final class RecetteController extends AbstractController
 {
     #[Route(name: 'app_recette_index', methods: ['GET'])]
@@ -78,4 +78,53 @@ final class RecetteController extends AbstractController
 
         return $this->redirectToRoute('app_recette_index', [], Response::HTTP_SEE_OTHER);
     }
+    #[Route('/recette/ajouter', name: 'ajouter_recette')]
+    public function ajouterRecette(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer tous les ingrédients de la base pour afficher dans le formulaire
+        $ingredients = $entityManager->getRepository(Ingredient::class)->findAll();
+
+        if ($request->isMethod('POST')) {
+            // Récupérer les données du formulaire
+            $titre = $request->request->get('titre');
+            $instructions = $request->request->get('instructions');
+            $selectedIngredientIds = $request->request->get('ingredients', []); // Tableau des IDs sélectionnés
+
+            // Vérification des champs requis
+            if (empty($titre) || empty($instructions)) {
+                $this->addFlash('error', 'Le titre et les instructions sont obligatoires.');
+                return $this->render('recette/ajouter.html.twig', [
+                    'ingredients' => $ingredients,
+                ]);
+            }
+
+            // Création de la recette
+            $recette = new Recette();
+            $recette->setTitre($titre);
+            $recette->setInstructions($instructions);
+
+            // Ajout des ingrédients sélectionnés
+            foreach ($selectedIngredientIds as $ingredientId) {
+                $ingredient = $entityManager->getRepository(Ingredient::class)->find($ingredientId);
+                if ($ingredient) {
+                    $recette->addIngredient($ingredient);
+                }
+            }
+
+            // Sauvegarde de la recette
+            $entityManager->persist($recette);
+            $entityManager->flush();
+
+            // Redirection ou message de confirmation
+            $this->addFlash('success', 'La recette a été ajoutée avec succès.');
+
+            return $this->redirectToRoute('ajouter_recette');
+        }
+
+        // Afficher le formulaire pour ajouter une recette
+        return $this->render('add_recette.html.twig', [
+            'ingredients' => $ingredients,
+        ]);
+    }
+    
 }
